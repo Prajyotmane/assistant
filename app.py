@@ -24,7 +24,7 @@ def upload_file():
       return 'success'
 
 @app.route('/hello')
-def hello()
+def hello():
       return "Hello"
 if __name__ == '__main__':
    app.run()
