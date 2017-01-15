@@ -1,5 +1,6 @@
 from flask import Flask ,render_template, request
 from werkzeug import secure_filename
+import os
 import numpy as np
 from sklearn.svm import NuSVC
 app = Flask(__name__)
@@ -24,9 +25,11 @@ def upload_file():
  
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader_file():
+   UPLOAD_FOLDER = './uploads'
    if request.method == 'POST':
+      app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
       f = request.files['file']
-      f.save(secure_filename(f.filename))
+      f.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
       return 'success'
 
 @app.route('/hello')
