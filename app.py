@@ -16,5 +16,15 @@ def hello_world():
     num = clf.predict([[14.25,2]])
     return render_template('hello.html', val = num)
 
+@app.route('/upload', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['uploaded_file']
+      f.save(secure_filename(f.filename))
+      return 'success'
+
+@app.route('/hello')
+def hello()
+      return "Hello"
 if __name__ == '__main__':
    app.run()
